@@ -82,9 +82,11 @@ router.get('/auth-status', authenticateAdmin, (req, res) => {
 // Get all messages
 router.get('/messages', authenticateAdmin, async (req, res) => {
   try {
-    const page = parseInt(req.query.page as string) || 1;
-    const limit = parseInt(req.query.limit as string) || 10;
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 10;
     const status = req.query.status as string;
+
+    console.log('Query Params:', req.query); // debugging
 
     const query: any = {};
     if (status && ['pending', 'accepted', 'rejected'].includes(status)) {
@@ -111,15 +113,6 @@ router.get('/messages', authenticateAdmin, async (req, res) => {
           pages: Math.ceil(total / limit)
         }
       }
-    });
-
-  } catch (error) {
-    console.error('Error fetching messages:', error);
-    res.status(500).json({
-      success: false,
-      message: 'Error fetching messages'
-    });
-  }
 });
 
 // Delete message
