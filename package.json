@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Backend for agency contact form and admin dashboard",
   "main": "src/server.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "start": "node src/server.ts",
