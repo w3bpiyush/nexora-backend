@@ -143,4 +143,4 @@ router.delete('/message/:id', authenticateAdmin, async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router; 
