@@ -753,7 +753,7 @@
 
         async function checkAuth() {
             try {
-                const response = await fetch('/api/admin/auth-status');
+                const response = await fetch('https://nexorabackend.vercel.app/api/admin/auth-status');
                 const result = await response.json();
                 
                 if (!result.success || !result.authenticated) {
@@ -766,7 +766,7 @@
 
         async function loadMessages(page = 1, status = '', search = '') {
             try {
-                let url = `/api/admin/messages?page=${page}&limit=10`;
+                let url = `https://nexorabackend.vercel.app/api/admin/messages?page=${page}&limit=10`;
                 if (status) url += `&status=${status}`;
                 if (search) url += `&search=${encodeURIComponent(search)}`;
 
@@ -868,10 +868,10 @@
         async function updateStats() {
             try {
                 const [totalRes, pendingRes, acceptedRes, rejectedRes] = await Promise.all([
-                    fetch('/api/admin/messages?limit=1'),
-                    fetch('/api/admin/messages?status=pending&limit=1'),
-                    fetch('/api/admin/messages?status=accepted&limit=1'),
-                    fetch('/api/admin/messages?status=rejected&limit=1')
+                    fetch('https://nexorabackend.vercel.app/api/admin/messages?limit=1'),
+                    fetch('https://nexorabackend.vercel.app/api/admin/messages?status=pending&limit=1'),
+                    fetch('https://nexorabackend.vercel.app/api/admin/messages?status=accepted&limit=1'),
+                    fetch('https://nexorabackend.vercel.app/api/admin/messages?status=rejected&limit=1')
                 ]);
 
                 const [total, pending, accepted, rejected] = await Promise.all([
@@ -932,7 +932,7 @@
             btn.textContent = 'Deleting...';
 
             try {
-                const response = await fetch(`/api/admin/message/${deleteMessageId}`, {
+                const response = await fetch(`https://nexorabackend.vercel.app/api/admin/message/${deleteMessageId}`, {
                     method: 'DELETE'
                 });
 
@@ -954,7 +954,7 @@
 
         async function logout() {
             try {
-                const response = await fetch('/api/admin/logout', {
+                const response = await fetch('https://nexorabackend.vercel.app/api/admin/logout', {
                     method: 'POST'
                 });
 
