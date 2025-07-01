@@ -16,11 +16,19 @@ const PORT = 3000;
 // Connect to MongoDB
 connectDB();
 
+const allowedOrigins = ['https://nexoraagency.vercel.app', 'https://nexorabackend.vercel.app'];
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://nexoraagency.vercel.app/',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
